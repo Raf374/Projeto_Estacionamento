@@ -5,6 +5,8 @@ package Estacionamento;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import javax.swing.*;
+//import jdk.nashorn.internal.scripts.JO;
 
 /**
  *
@@ -178,8 +180,26 @@ public class JF_Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarActionPerformed
-        // TODO add your handling code here:
+        // Validação
+        //String nome = txt_Login.getText();
+        //String senha = txt_Senha.getText();
+
+        if (txt_Login.getText().equals("adm") && txt_Senha.getText().equals("adm")) {
+            //JOptionPane.showMessageDialog(null, "Bem vindo ao sistema!");
+            JF_Gerenciar abrir = new JF_Gerenciar();
+            abrir.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario ou senha incorreto!");
+            limparCampos();
+        }
     }//GEN-LAST:event_btn_EntrarActionPerformed
+
+    public void limparCampos() {
+        txt_Login.setText("");
+        txt_Senha.setText("");
+        txt_Login.grabFocus();
+    }
 
     private void txt_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_LoginActionPerformed
         // TODO add your handling code here:
@@ -187,7 +207,7 @@ public class JF_Login extends javax.swing.JFrame {
 
     private void btn_SairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SairMouseClicked
         // TODO add your handling code here:
-        
+        System.exit(0);
     }//GEN-LAST:event_btn_SairMouseClicked
 
     private void txt_SenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SenhaActionPerformed
