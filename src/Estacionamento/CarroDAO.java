@@ -34,7 +34,7 @@ public class CarroDAO {
             ps.setString(2, carro.getCor());
             ps.setString(3, carro.getDescricao());
 
-            if (ps.executeLargeUpdate() > 0) {
+            if (ps.executeUpdate()>0){
                 return "Inserido com sucesso!";
             } else {
                 return "Falha ao inserir!";
@@ -81,4 +81,27 @@ public class CarroDAO {
         
     }
     //Método select
+    public List<CarroBean> listarTodos(){
+        String sql="select * from tbcarro";
+        //Vetor vazio para carregar os valores do bd
+        List<CarroBean> listaCarros= new ArrayList<>();
+        try {
+            PreparedStatement ps= getCon().prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            if(rs!=null){
+                while(rs.next()){
+                    CarroBean cb= new CarroBean();
+                    cb.setPlaca(rs.getString(1));
+                    cb.setCor(rs.getString(2));
+                    cb.setDescricao(rs.getString(3));
+                    listaCarros.add(cb);
+                }
+                return listaCarros;
+            }else{
+                return null;
+            }
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 }
